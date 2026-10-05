@@ -96,6 +96,7 @@ public class Exercice3{
             newOppCompetitors.add(newComp);
         }
 
+        // commit test
         if (!newOppCompetitors.isEmpty()) {
             Database.insert(newOppCompetitors,false);
         } 
