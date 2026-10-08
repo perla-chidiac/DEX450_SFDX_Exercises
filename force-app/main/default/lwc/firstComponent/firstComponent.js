@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
 
 export default class FirstComponent extends LightningElement {
-    @api name = "dd"
+    @api name = "P"
 }   
