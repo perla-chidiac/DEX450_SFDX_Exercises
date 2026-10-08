@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Employee Directory" icon-name="standard:user">
+        <div class="slds-var-m-around_medium">
+            
+            <!-- DEPARTMENT DROPDOWN -->
+            <lightning-combobox
+                name="department"
+                label="Select Department"
+                value={chosenDepartment}
+                options={departmentOptions}
+                onchange={handleDepartmentChange}>
+            </lightning-combobox>
+
+            <!-- EMPLOYEE RESULTS LIST -->
+            <template lwc:if={filteredEmployees.length}>
+                <h3 class="slds-text-heading_small slds-var-m-bottom_small">Employees:</h3>
+                <ul class="slds-has-dividers_bottom-space">
+                    <template for:each={filteredEmployees} for:item="emp">
+                        <!-- data-id dynamically stores the loop ID so JS can read it on click -->
+                        <li key={emp.id} 
+                            data-id={emp.id} 
+                            onclick={handleEmployeeClick} 
+                            style="cursor: pointer;"
+                            class="slds-item slds-var-p-around_x-small employee-row">
+                            <strong>{emp.name}</strong> - {emp.position}
+                        </li>
+                    </template>
+                </ul>
+            </template>
+
+            <!-- SELECTED EMPLOYEE DETAILS PANEL -->
+            <template lwc:if={selectedEmployee}>
+                <div class="slds-box slds-theme_shade slds-var-m-top_medium">
+                    <h3 class="slds-text-heading_medium">{selectedEmployee.name}</h3>
+                    <p><strong>Department:</strong> {selectedEmployee.department}</p>
+                    <p><strong>Position:</strong> {selectedEmployee.position}</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
