@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Parent Component">
+        <lightning-button
+            label="Increment Child Counter"
+            onclick={handleChildIncrementation}
+        >
+        </lightning-button>
+        <c-counter-child-component counter={count}></c-counter-child-component>
+    </lightning-card>
+</template>
