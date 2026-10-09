@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Parent Dashboard">
+        <div class="slds-var-m-around_medium">
+            <p>Child 1 Status: <strong>{child1Status}</strong></p>
+            <p>Child 2 Status: <strong>{child2Status}</strong></p>
+
+            <!-- <lightning-button 
+                label="Reset All Children" 
+                onclick={handleResetAll} 
+                class="slds-var-m-vertical_small">
+            </lightning-button> -->
+
+            <!-- Child 1: Differentiated by data-id="child1" -->
+            <div class="slds-box slds-var-m-bottom_small">
+                <c-status-child-component 
+                    data-id="child1" 
+                    onstatuschange={handleStatusChange}>
+                </c-status-child-component>
+            </div>
+
+            <!-- Child 2: Differentiated by data-id="child2" -->
+            <div class="slds-box">
+                <c-status-child-component 
+                    data-id="child2" 
+                    onstatuschange={handleStatusChange}>
+                </c-status-child-component>
+            </div>
+        </div>
+    </lightning-card>
+</template>
