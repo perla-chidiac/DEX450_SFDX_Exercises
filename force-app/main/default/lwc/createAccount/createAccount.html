@@ -1,0 +1,26 @@
+<template>
+    <div>
+        <lightning-input 
+            type="text" 
+            label="Account Name" 
+            value={accountName} 
+            onchange={handleAccountNameChange}>
+        </lightning-input>
+        <lightning-button 
+            label="Create Account" 
+            onclick={handleCreateAccount}>
+        </lightning-button>
+    </div>
+    
+    <lightning-input 
+        type="number" 
+        label="Max Records" 
+        value={maxRecords} 
+        onchange={handleMaxRecordsChange}>
+    </lightning-input>
+    <template for:each={accounts} for:item="acc">
+        <lightning-card key={acc.Id}>
+            {acc.Name}
+        </lightning-card>
+    </template>
+</template>
