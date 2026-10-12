@@ -1,4 +1,4 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import createAccount from '@salesforce/apex/AccountController.createAccount';
 import getAccounts from '@salesforce/apex/AccountController.getAccounts';
 import { refreshApex } from '@salesforce/apex';

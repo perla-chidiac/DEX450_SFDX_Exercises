@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title=" Create New Case">
+        <lightning-input
+            type="text"
+            label="Case Subject"
+            value={caseSubject}
+            onchange={handleCaseSubjectChange}>
+        </lightning-input>
+        <lightning-input
+            type="text"
+            label="Case Description"
+            value={caseDescription}
+            onchange={handleCaseDescriptionChange}>
+        </lightning-input>
+        <lightning-button
+            label="Create Case"
+            onclick={handleCreateCase}
+            variant="brand">
+        </lightning-button>
+    </lightning-card>
+
+    <lightning-card title="Case Search Portal">
+        <div>
+            <!-- User search case by case number -->
+            <lightning-input
+                type="search"
+                label="Search by Case Number"
+                value={caseNumber}
+                onchange={handleSearch}
+            ></lightning-input>
+
+            <!-- let user filter by status -->
+            <lightning-combobox
+                label="Filter by Status"
+                value={selectedStatus}
+                options={statusOptions}
+                onchange={handleStatusChange}
+            >
+            </lightning-combobox>
+        </div>
+
+        <lightning-datatable
+            key-field="Id"
+            data={cases}
+            columns={columns}
+        >
+        </lightning-datatable>
+        
+    </lightning-card>
+</template>

@@ -1,0 +1,55 @@
+<template>
+    <lightning-card title="Account Contacts">
+        <!-- Header Actions Layout -->
+        <div class="slds-p-horizontal_small slds-p-vertical_small slds-grid slds-grid_align-end">
+            <lightning-button 
+                label="Add New Contact" 
+                variant="brand" 
+                icon-name="utility:add" 
+                onclick={openCreateModal}>
+            </lightning-button>
+        </div>
+    
+        <div style="max-height: 400px;" class="slds-grid slds-wrap slds-gutters">
+            <template for:each={contacts} for:item="contact">
+                <div key={contact.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
+                    
+                    <!-- Individual Contact Card -->
+                    <lightning-card title={contact.LastName} icon-name="standard:contact">
+                        
+                        <!-- Individual Delete Button in the Card Actions Area -->
+                        <div slot="actions">
+                            <lightning-button            
+                                label="Delete Contact" 
+                                variant="border-filled"
+                                value={contact.Id}
+                                action-name="delete"
+                                onclick={handleDeleteContact}>
+                            </lightning-button>
+                        </div>
+
+                        <!-- Contact Details Body -->
+                        <div class="slds-p-horizontal_small">
+                            <p class="slds-p-vertical_xx-small">
+                                <strong>First Name:</strong> {contact.FirstName}
+                            </p>
+                            <p class="slds-p-vertical_xx-small">
+                                <strong>Last Name:</strong> {contact.LastName}
+                            </p>
+                            <p class="slds-p-vertical_xx-small">
+                                <strong>Email:</strong> {contact.Email}
+                            </p>
+                            <p class="slds-p-vertical_xx-small">
+                                <strong>Phone:</strong> {contact.Phone}
+                            </p>
+                            <p class="slds-p-vertical_xx-small">
+                                <strong>Title:</strong> {contact.Title}
+                            </p>
+                        </div>
+                    </lightning-card>
+
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
