@@ -1,0 +1,82 @@
+<template>
+    <lightning-card title="Account Opportunity Overview">
+        <p>Accounts and their related opportunities</p>
+        <template if:true={wrapperData}>
+            <lightning-accordion allow-multiple-sections-open>
+                <template for:each={wrapperData} for:item="wrap">
+                    <lightning-accordion-section
+                        key={wrap.acc.Id}
+                        name={wrap.acc.Id}
+                        label={wrap.acc.Name}
+                    >
+                        <!-- header -->
+                        <div>
+                            <p>{wrap.oppCount} Opportunities</p>
+                            <strong>${wrap.totalAmount}</strong>
+                        </div>
+
+                        <!-- opp list -->
+                        <template if:true={wrap.oppCount}>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Stage</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={wrap.oppList} for:item="opp">
+                                        <tr key={opp.Id}>
+                                            <td>{opp.Name}</td>
+                                            <td>{opp.StageName}</td>
+                                            <td>
+                                                <lightning-formatted-number value={opp.Amount} format-style="currency"></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <template if:false={opp.IsClosed}>
+                                                    <lightning-button
+                                                        label="Mark as Closed"
+                                                        variant="brand"
+                                                        data-id={opp.Id}
+                                                        onclick={handleMarkAsClosed}
+                                                    >
+                                                    </lightning-button>
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </template>
+
+                        <template if:false={wrap.oppCount}>
+                            <p>No opportunity found in this account.</p>
+                        </template>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion>
+        </template>
+
+        <!-- modal -->
+        <template if:true={isModelOpen}>
+            <lightning-card title="Close Opportunity">
+                <lightning-record-edit-form
+                    object-api-name="Opportunity"
+                    onsubmit={handleUpdateOpportunity}
+                >
+                    <lightning-combobox
+                        name="stageSelect"
+                        label="Select Final Stage"
+                        value={selectedStage}
+                        placeholder="Choose Stage..."
+                        options={stageOptions}
+                        onchange={handleStageChange}>
+                    </lightning-combobox>
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button label="Update" onclick={handleUpdateOpportunity}></lightning-button>
+                </lightning-record-edit-form>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>
